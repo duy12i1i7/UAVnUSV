@@ -43,5 +43,5 @@ source /opt/ros/foxy/setup.bash
 
 
 sudo apt update
-sudo apt install ros-foxy-ros1-bridge
+sudo apt install ros-foxy-ros1-bridge -y
 
