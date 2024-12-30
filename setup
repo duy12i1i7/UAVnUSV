@@ -1,6 +1,6 @@
 source /opt/ros/noetic/setup.bash
 
-sudo apt install ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
+sudo apt install -y ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
 
 wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
 python2 get-pip.py
