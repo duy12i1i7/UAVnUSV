@@ -1,0 +1,67 @@
+source /opt/ros/noetic/setup.bash
+
+sudo apt install ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
+
+wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+python2 get-pip.py
+
+rm $HOME/.local/bin/pip
+export PATH="$HOME/.local/bin:$PATH"
+
+
+sudo apt install python3-pip -y
+
+pip2 install pandas jinja2 pyserial cerberus pyulog==0.7.0 numpy toml pyquaternion empy pyyaml 
+pip3 install packaging numpy empy toml pyyaml jinja2 pyargparse kconfiglib jsonschema future
+
+sudo apt upgrade -y
+sudo apt-get install -y ros-noetic-moveit-msgs ros-noetic-object-recognition-msgs ros-noetic-octomap-msgs ros-noetic-camera-info-manager  ros-noetic-control-toolbox ros-noetic-polled-camera ros-noetic-controller-manager ros-noetic-transmission-interface ros-noetic-joint-limits-interface
+
+cd ~/catkin_ws/src
+git clone -b noetic-devel https://github.com/ros-simulation/gazebo_ros_pkgs.git
+cd ~/catkin_ws
+catkin_make build
+
+mkdir -p ~/.gazebo/models/
+
+git clone --recurse-submodules https://github.com/osrf/gazebo_models.git  ~/.gazebo/models/
+
+
+
+sudo apt upgrade -y
+
+
+cd
+
+sudo apt install -y ros-noetic-mavros ros-noetic-mavros-extras       
+wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
+sudo chmod a+x ./install_geographiclib_datasets.sh
+sudo ./install_geographiclib_datasets.sh 
+
+cd 
+
+git clone https://github.com/PX4/PX4-Autopilot.git
+mv PX4-Autopilot PX4_Firmware
+cd PX4_Firmware
+git checkout -b xtdrone/dev v1.13.2
+git submodule update --init --recursive
+
+cd
+
+git clone https://gitee.com/robin_shaun/XTDrone.git
+cd XTDrone
+git checkout 1_13_2
+git submodule update --init --recursive
+# Modify the startup script file
+cp sitl_config/init.d-posix/* ~/PX4_Firmware/ROMFS/px4fmu_common/init.d-posix/
+# Add launch file
+cp -r sitl_config/launch/* ~/PX4_Firmware/launch/
+# Add world file
+cp sitl_config/worlds/* ~/PX4_Firmware/Tools/sitl_gazebo/worlds/
+# Modify some model files
+cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/ 
+# Replace file with the same name
+cd ~/.gazebo/models/
+rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
+
+
