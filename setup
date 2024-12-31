@@ -2,6 +2,7 @@ source /opt/ros/noetic/setup.bash
 
 sudo apt install -y ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
 
+rm get-pip.py
 wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
 python2 get-pip.py
 
@@ -17,6 +18,7 @@ pip3 install packaging numpy empy toml pyyaml jinja2 pyargparse kconfiglib jsons
 sudo apt upgrade -y
 sudo apt-get install -y ros-noetic-moveit-msgs ros-noetic-object-recognition-msgs ros-noetic-octomap-msgs ros-noetic-camera-info-manager  ros-noetic-control-toolbox ros-noetic-polled-camera ros-noetic-controller-manager ros-noetic-transmission-interface ros-noetic-joint-limits-interface
 
+mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 git clone -b noetic-devel https://github.com/ros-simulation/gazebo_ros_pkgs.git
 cd ~/catkin_ws
