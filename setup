@@ -22,7 +22,7 @@ mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 git clone -b noetic-devel https://github.com/ros-simulation/gazebo_ros_pkgs.git
 cd ~/catkin_ws
-catkin_make build
+catkin_make
 
 mkdir -p ~/.gazebo/models/
 
