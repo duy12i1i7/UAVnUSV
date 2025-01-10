@@ -24,6 +24,7 @@ git clone -b noetic-devel https://github.com/ros-simulation/gazebo_ros_pkgs.git
 cd ~/catkin_ws
 catkin_make
 
+sudo rm -rf ~/.gazebo/models/
 mkdir -p ~/.gazebo/models/
 
 git clone --recurse-submodules https://github.com/osrf/gazebo_models.git  ~/.gazebo/models/
@@ -47,6 +48,14 @@ mv PX4-Autopilot PX4_Firmware
 cd PX4_Firmware
 git checkout -b xtdrone/dev v1.13.2
 git submodule update --init --recursive
+cd ~/PX4_Firmware
+make px4_sitl_default gazebo
+
+source ~/catkin_ws/devel/setup.bash
+source ~/PX4_Firmware/Tools/setup_gazebo.bash ~/PX4_Firmware/ ~/PX4_Firmware/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4_Firmware
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4_Firmware/Tools/sitl_gazebo
+
 
 cd
 
@@ -65,6 +74,9 @@ cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/
 # Replace file with the same name
 cd ~/.gazebo/models/
 rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
+
+cd ~/PX4_Firmware
+make px4_sitl_default gazebo
 
 cd
 
