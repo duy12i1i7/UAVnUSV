@@ -66,4 +66,8 @@ cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/
 cd ~/.gazebo/models/
 rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
 
+cd
+
+sudo apt install python-is-python3 -y
+
 
