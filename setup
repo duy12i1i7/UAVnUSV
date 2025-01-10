@@ -49,7 +49,7 @@ cd PX4_Firmware
 git checkout -b xtdrone/dev v1.13.2
 git submodule update --init --recursive
 cd ~/PX4_Firmware
-HEADLESS=1 make px4_sitl_default gazebo
+make px4_sitl_default gazebo
 
 source ~/catkin_ws/devel/setup.bash
 source ~/PX4_Firmware/Tools/setup_gazebo.bash ~/PX4_Firmware/ ~/PX4_Firmware/build/px4_sitl_default
@@ -76,7 +76,7 @@ cd ~/.gazebo/models/
 rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
 
 cd ~/PX4_Firmware
-HEADLESS=1 make px4_sitl_default gazebo
+make px4_sitl_default gazebo
 
 cd
 
