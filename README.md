@@ -188,8 +188,56 @@ rostopic pub -r 1  /wamv/thrusters/right_thrust_cmd std_msgs/Float32 "data: 1.0"
 ```
 The control of the UAV is the same as usual. The coordination of these two types unmanned vehicle is depended on your needs.
 
-
 https://github.com/user-attachments/assets/c1f77f09-6ae9-4ccc-9719-f09899500ef6
 
 
 At this point, the preliminary simulation of UAV and USV is completed!
+
+### (Optional) Combine with ROS2
+#### Install ROS 2 Foxy
+- Ubuntu 20.04 with Foxy is recommended because it's the most stable
+- Following this link: [ROS Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Install-Debians.html) in order to install ROS into your system.
+
+#### Install Bridge
+The package `ros-foxy-ros1-bridge` is a bridge that helps ROS 1 can communicate to ROS 2.
+```
+source /opt/ros/foxy/setup.bash
+sudo apt update
+sudo apt install ros-foxy-ros1-bridge -y
+```
+#### Configure Bridge
+- Open a terminal to run the simulation system
+```
+source /opt/ros/noetic/setup.bash
+cd ~/PX4_Firmware
+source ~/catkin_ws/devel/setup.bash    
+source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/sitl_gazebo
+
+roslaunch px4 sandisland.launch
+```
+- Open the other terminal to source ROS2
+```
+source /opt/ros/foxy/setup.bash
+```
+- Create ROS2 workspace and install ros1_bridge into this workspace(run on second terminal):
+```
+mkdir -p ~/ros2_bridge_ws/src
+cd ~/ros2_bridge_ws/src
+git clone https://github.com/ros2/ros1_bridge.git
+cd ..
+colcon build
+```
+Afterthat, run this command(run on second terminal):
+```
+source ~/ros2_bridge_ws/install/setup.bash
+```
+- Init the bridge(run on second terminal):
+```
+ros2 run ros1_bridge dynamic_bridge
+```
+Afterthat, you can control all components by using ROS2 command. For example, the left and right propellers of the USV release the same thrust:
+```
+ros2 topic pub /wamv/thrusters/left_thrust_cmd std_msgs/msg/Float32 "data: 1.0"
+```
