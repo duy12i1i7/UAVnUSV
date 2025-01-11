@@ -1,12 +1,19 @@
-echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
-echo "source ~/PX4_Firmware/Tools/setup_gazebo.bash ~/PX4_Firmware/ ~/PX4_Firmware/build/px4_sitl_default" >> ~/.bashrc
-echo "export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4_Firmware" >> ~/.bashrc
-echo "export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4_Firmware/Tools/sitl_gazebo" >> ~/.bashrc
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-echo "clear" >> ~/.bashrc
-source ~/.bashrc
+source /opt/ros/noetic/setup.bash
+cd ~/PX4_Firmware
+source ~/catkin_ws/devel/setup.bash    
+source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/sitl_gazebo
 
+cd ~/XTDrone
+cp sensing/gimbal/gazebo_gimbal_controller_plugin.cpp ~/PX4_Firmware/Tools/sitl_gazebo/src/
+cp sitl_config/init.d-posix/rcS ~/PX4_Firmware/ROMFS/px4fmu_common/init.d-posix/
+cp sitl_config/worlds/* ~/PX4_Firmware/Tools/sitl_gazebo/worlds/
+cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/ 
+cp -r sitl_config/launch/* ~/PX4_Firmware/launch/
+cd ~/.gazebo/models/
+rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
 
 cd ~/PX4_Firmware
-roslaunch px4 mavros_posix_sitl.launch
+make px4_sitl_default gazebo
 
