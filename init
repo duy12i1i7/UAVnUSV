@@ -1,7 +1,8 @@
-cp -r ~/XTDrone/sitl_config/usv/* ~/catkin_ws/src/
-cd ~/catkin_ws
-catkin_make
-source ~/catkin_ws/devel/setup.bash
-
+source /opt/ros/noetic/setup.bash
+cd ~/PX4_Firmware
+source ~/catkin_ws/devel/setup.bash    
+source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/sitl_gazebo
 
 roslaunch px4 sandisland.launch
