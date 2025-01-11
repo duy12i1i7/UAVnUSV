@@ -25,7 +25,6 @@ rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
 sudo apt install python-is-python3 -y
 
 cd ~/PX4_Firmware
-rm ~/PX4_Firmware/Tools/sitl_gazebo/models/typhoon_h480/typhoon_h480.sdf
 make px4_sitl_default gazebo
 
 
