@@ -1,24 +1,15 @@
-cd
-
-git clone https://gitee.com/robin_shaun/XTDrone.git
-cd XTDrone
-git checkout 1_13_2
-git submodule update --init --recursive
-cp sitl_config/init.d-posix/* ~/PX4_Firmware/ROMFS/px4fmu_common/init.d-posix/
-cp -r sitl_config/launch/* ~/PX4_Firmware/launch/
-# Add world file
-cp sitl_config/worlds/* ~/PX4_Firmware/Tools/sitl_gazebo/worlds/
-# Modify some model files
-cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/ 
-# Replace file with the same name
-cd ~/.gazebo/models/
-rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
-
+source /opt/ros/noetic/setup.bash
 cd ~/PX4_Firmware
-make px4_sitl_default gazebo
-
-
-
+source ~/catkin_ws/devel/setup.bash    
+source Tools/setup_gazebo.bash $(pwd) $(pwd)/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd)/Tools/sitl_gazebo
+cd
+sudo apt install python-is-python3 -y
+cp -r ~/XTDrone/sitl_config/usv/* ~/catkin_ws/src/
+cd catkin_ws
+catkin_make 
+roslaunch px4 sandisland.launch
 
 
 
