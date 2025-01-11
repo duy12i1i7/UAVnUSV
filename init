@@ -1,8 +1,3 @@
-sudo rm -rf -p ~/catkin_ws
-
-mkdir -p ~/catkin_ws/src/
-source /opt/ros/noetic/setup.bash
-
 cp -r ~/XTDrone/sitl_config/usv/* ~/catkin_ws/src/
 cd ~/catkin_ws
 catkin_make
