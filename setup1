@@ -1,21 +1,5 @@
 source /opt/ros/noetic/setup.bash
 
-sudo apt install -y ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
-
-rm get-pip.py
-wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
-python2 get-pip.py
-
-rm $HOME/.local/bin/pip
-export PATH="$HOME/.local/bin:$PATH"
-
-
-sudo apt install python3-pip -y
-
-pip2 install pandas jinja2 pyserial cerberus pyulog==0.7.0 numpy toml pyquaternion empy pyyaml 
-pip3 install packaging numpy empy toml pyyaml jinja2 pyargparse kconfiglib jsonschema future
-
-sudo apt upgrade -y
 sudo apt-get install -y ros-noetic-moveit-msgs ros-noetic-object-recognition-msgs ros-noetic-octomap-msgs ros-noetic-camera-info-manager  ros-noetic-control-toolbox ros-noetic-polled-camera ros-noetic-controller-manager ros-noetic-transmission-interface ros-noetic-joint-limits-interface
 
 mkdir -p ~/catkin_ws/src
@@ -31,7 +15,6 @@ git clone --recurse-submodules https://github.com/osrf/gazebo_models.git  ~/.gaz
 
 
 
-sudo apt upgrade -y
 
 
 cd
