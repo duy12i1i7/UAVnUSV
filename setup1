@@ -1,12 +1,17 @@
 source /opt/ros/noetic/setup.bash
+mkdir -p ~/catkin_ws/src
+mkdir -p ~/catkin_ws/scripts
+cd catkin_ws/src && catkin_init_workspace
+cd .. && catkin_make
 
 sudo apt-get install -y ros-noetic-moveit-msgs ros-noetic-object-recognition-msgs ros-noetic-octomap-msgs ros-noetic-camera-info-manager  ros-noetic-control-toolbox ros-noetic-polled-camera ros-noetic-controller-manager ros-noetic-transmission-interface ros-noetic-joint-limits-interface
 
-mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
 git clone -b noetic-devel https://github.com/ros-simulation/gazebo_ros_pkgs.git
 cd ~/catkin_ws
 catkin_make
+
+source ~/catkin_ws/devel/setup.bash
 
 sudo rm -rf ~/.gazebo/models/
 mkdir -p ~/.gazebo/models/
@@ -14,10 +19,9 @@ mkdir -p ~/.gazebo/models/
 git clone --recurse-submodules https://github.com/osrf/gazebo_models.git  ~/.gazebo/models/
 
 
-
-
-
 cd
+
+rm ./install_geographiclib_datasets.sh 
 
 sudo apt install -y ros-noetic-mavros ros-noetic-mavros-extras       
 wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh
