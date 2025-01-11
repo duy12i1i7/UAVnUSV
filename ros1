@@ -3,7 +3,7 @@ sudo apt install -y ninja-build exiftool ninja-build protobuf-compiler libeigen3
 
 pip3 install packaging numpy empy toml pyyaml jinja2 pyargparse
 
-sudo apt install python2
+sudo apt install python2 -y
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py # Fetch get-pip.py for python 2.7 
 python2 get-pip.py
 
