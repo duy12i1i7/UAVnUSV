@@ -1,3 +1,20 @@
+
+sudo apt install -y ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
+
+rm get-pip.py
+wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+python2 get-pip.py
+
+rm $HOME/.local/bin/pip
+export PATH="$HOME/.local/bin:$PATH"
+
+
+sudo apt install python3-pip -y
+
+pip2 install pandas jinja2 pyserial cerberus pyulog==0.7.0 numpy toml pyquaternion empy pyyaml 
+pip3 install packaging numpy empy toml pyyaml jinja2 pyargparse kconfiglib jsonschema future
+
+
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt install curl -y 
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
