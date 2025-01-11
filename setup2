@@ -10,30 +10,3 @@ source ~/.bashrc
 cd ~/PX4_Firmware
 roslaunch px4 mavros_posix_sitl.launch
 
-cd
-
-git clone https://gitee.com/robin_shaun/XTDrone.git
-cd XTDrone
-git checkout 1_13_2
-git submodule update --init --recursive
-# Modify the startup script file
-cp sitl_config/init.d-posix/* ~/PX4_Firmware/ROMFS/px4fmu_common/init.d-posix/
-# Add launch file
-cp -r sitl_config/launch/* ~/PX4_Firmware/launch/
-# Add world file
-cp sitl_config/worlds/* ~/PX4_Firmware/Tools/sitl_gazebo/worlds/
-# Modify some model files
-cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/ 
-# Replace file with the same name
-cd ~/.gazebo/models/
-rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
-sudo apt install python-is-python3 -y
-
-cd ~/PX4_Firmware
-make px4_sitl_default gazebo
-
-
-
-
-
-
