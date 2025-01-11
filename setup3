@@ -13,7 +13,6 @@ cp -r sitl_config/models/* ~/PX4_Firmware/Tools/sitl_gazebo/models/
 # Replace file with the same name
 cd ~/.gazebo/models/
 rm -r stereo_camera/ 3d_lidar/ 3d_gpu_lidar/ hokuyo_lidar/
-sudo apt install python-is-python3 -y
 
 cd ~/PX4_Firmware
 make px4_sitl_default gazebo
