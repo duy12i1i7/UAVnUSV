@@ -3,6 +3,7 @@ echo "source ~/PX4_Firmware/Tools/setup_gazebo.bash ~/PX4_Firmware/ ~/PX4_Firmwa
 echo "export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4_Firmware" >> ~/.bashrc
 echo "export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4_Firmware/Tools/sitl_gazebo" >> ~/.bashrc
 source ~/.bashrc
+source /opt/ros/noetic/setup.bash
 
 cd ~/PX4_Firmware
 roslaunch px4 mavros_posix_sitl.launch
