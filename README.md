@@ -1,7 +1,40 @@
 ## Description
 
 XTDrone is a UAV simulation platform based on PX4, ROS and Gazebo. XTDrone supports mulitrotors (including quadrotors and hexarotors), fixed wings, VTOLs (including quadplanes, tailsitters and tiltrotors) and other unmanned systems (such as UGVs, USVs and robotic arms). It's convenient to deploy the algorithm to real UAVs after testing and debugging on the simulation platform.
-## Installation
+## Quick setup(fewer command)
+```
+sudo apt install git -y
+git clone https://github.com/duy12i1i7/UAVnUSV.git
+mv UAVnUSV/init ~/
+mv UAVnUSV/ros1 ~/
+mv UAVnUSV/ros2 ~/
+mv UAVnUSV/setup1 ~/
+mv UAVnUSV/setup2 ~/
+mv UAVnUSV/setup3 ~/
+sudo chmod 777 init ros1 ros2 setup1 setup2 setup3
+./ros1
+./setup1
+```
+When Gazebo start, terminate it and continue run this command:
+```
+sudo chmod 777 init ros1 ros2 setup1 setup2 setup3
+./setup2
+```
+When Gazebo start, terminate it and continue run this command:
+```
+sudo chmod 777 init ros1 ros2 setup1 setup2 setup3
+./setup3
+```
+When Gazebo start, terminate it. At this point, project was finished configuration.
+
+When you want to start the UAVnUSV Sim, run:
+```
+sudo chmod 777 init
+./init
+```
+
+
+## Installation(step-by-step)
 ### Installation of Dependencies
 - In the process of using apt to install (including the installation of ROS), if there is a dependency problem that is difficult to solve, you can use aptitude install (if there is no aptitude, use sudo apt install aptitude to install). For example, sudo aptitude install ros-kinetic-desktop, it will recommend dependency solutions in turn. During the instruction execution process, if you think the logic is feasible, press Y, and if it is not feasible, press N. Of course, this tool is not omnipotent. If it can't solve the dependency problem, you still need to analyze and solve it yourself.
 - Sometimes an error will be reported in the process of apt, indicating that "Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?" At this time, follow the prompts.
